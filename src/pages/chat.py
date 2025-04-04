@@ -1,10 +1,14 @@
+import os
+import sys
+
 import openai
 import streamlit as st
 
+sys.path.append(os.getcwd())
 
-from src.core.chat_deep_research import jina_deepsearch
-from src.core.chat_grd_w_gg import google_grounding_search
-from src.core.chat_search_agent import chat_with_search
+from core.chat_deep_research import jina_deepsearch
+from core.chat_grd_w_gg import google_grounding_search
+from core.chat_search_agent import chat_with_search
 from src.ui_components.chat_interface import (
     apply_css_styling,
     clean_thinking_tags,
@@ -126,9 +130,9 @@ def reset_chat_name_fun(new_name):
     new_chat_name = rename_chat(old_name, new_name)
 
     # Update the list
-    st.session_state["history_chats"][
-        st.session_state["current_chat_index"]
-    ] = new_chat_name
+    st.session_state["history_chats"][st.session_state["current_chat_index"]] = (
+        new_chat_name
+    )
 
     # Copy the session state data
     for key in list(st.session_state.keys()):
@@ -149,12 +153,10 @@ def process_user_input(prompt):
         st.chat_message("user").markdown(prompt)
 
         # Add user message to history
-        st.session_state["history" + current_chat].append(
-            {
-                "role": "user",
-                "content": prompt,
-            }
-        )
+        st.session_state["history" + current_chat].append({
+            "role": "user",
+            "content": prompt,
+        })
 
         # Rename chat if first message
         if len(st.session_state["history" + current_chat]) == 1:
@@ -243,12 +245,10 @@ def process_user_input(prompt):
         conversation_id = generate_conversation_id(prompt)
 
         # Add assistant response to history
-        st.session_state["history" + current_chat].append(
-            {
-                "role": "assistant",
-                "content": full_response,
-            }
-        )
+        st.session_state["history" + current_chat].append({
+            "role": "assistant",
+            "content": full_response,
+        })
 
         # Save data in old format
         save_current_chat_data(current_chat)
