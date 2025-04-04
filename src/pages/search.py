@@ -1,10 +1,14 @@
+import os
+import sys
 from datetime import datetime
 from typing import Any, Dict, List
 
 import streamlit as st
 
-from src.utils.ddg_utils import duckduckgo_search
-from src.utils.serper_utils import serper_search
+sys.path.append(os.getcwd())
+
+from utils.ddg_utils import duckduckgo_search
+from utils.serper_utils import serper_search
 
 # Configure page
 st.set_page_config(
@@ -66,15 +70,13 @@ def add_to_search_history(
             st.session_state.search_history.pop(0)
 
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        st.session_state.search_history.append(
-            {
-                "timestamp": timestamp,
-                "query": query,
-                "results": results,
-                "search_type": search_type,
-                "engine": engine,
-            }
-        )
+        st.session_state.search_history.append({
+            "timestamp": timestamp,
+            "query": query,
+            "results": results,
+            "search_type": search_type,
+            "engine": engine,
+        })
 
 
 def perform_search(

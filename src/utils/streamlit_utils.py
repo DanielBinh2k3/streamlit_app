@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit.components import v1
 
-from src.utils.logger import Logger
+from utils.logger import Logger
 
 logger = Logger("streamlit_utils")
 
