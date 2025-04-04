@@ -1,0 +1,8 @@
+gradio-client>=1.8.0
+openai>=1.69.0
+openai-agents>=0.0.7
+pytest>=8.3.5
+rich>=14.0.0
+streamlit>=1.44.0
+ruff>=0.1.1
+pre-commit>=4.2.0
